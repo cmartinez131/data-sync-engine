@@ -7,6 +7,7 @@ import { apiApp } from "./api.ts";
 import { startSync } from "./sync.ts";
 import { openStore } from "./store.ts";
 import { initLogs } from "./log.ts";
+import { rmSync } from "node:fs";
 import { parseArgs } from "node:util";
 import { SCENARIOS, setScenario } from "./scenario.ts";
 
@@ -33,7 +34,12 @@ thirdPartyApiApp.listen(4002, () => console.log("Simulated third-party API on ht
 // Our API. Reads the store only.
 apiApp.listen(3000, () => console.log("API on http://localhost:3000"));
 
-// The store. "sync.db" is a file next to package.json; it survives restarts.
+// The store. "sync.db" is a file next to package.json, fresh on every start like the
+// logs: the card restarts from tick 0 anyway, and a remembered identity from an
+// earlier run would change how a scenario plays out.
+for (const file of ["sync.db", "sync.db-wal", "sync.db-shm"]) {
+  rmSync(file, { force: true });
+}
 openStore("sync.db");
 
 // The sync loop. Polls the feeds and fills the store.

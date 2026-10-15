@@ -30,8 +30,6 @@ npm start -- --scenario ufc-api-down
 | `ufc-api-lagging` | The UFC API answers every poll but publishes every change a minute late. A round stays the third-party estimate for a minute after it ends, then the UFC numbers replace it |
 | `ufc-api-late-start` | The UFC API is dark until 40 seconds after fight 2 starts. Fight 2 first exists only from the third-party API, under a provisional id, and is linked to the UFC API's fight 2 when it appears |
 
-State lives in `sync.db` next to `package.json`; delete it to start clean. The card is over in under ten minutes; restart to replay it.
-
 ## Try it
 
 ```bash

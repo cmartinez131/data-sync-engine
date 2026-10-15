@@ -1,4 +1,4 @@
-// The store is the app's memory, kept in SQLite so it survives a restart.
+// The store is the app's memory, kept in SQLite, fresh on every start.
 // Tables:
 //   translated_reports  - every report an adapter produced, appended and never updated
 //   observations        - the latest report from each feed, per fight
@@ -312,9 +312,8 @@ export function listFights(now: number): MergedFight[] {
 // ---------------------------------------------------------------------------
 // Feed health
 
-// Called once per feed at startup so /status lists it before the first poll.
-// It replaces any row from a previous run: feed health and the counters
-// describe this process, while the fights themselves survive a restart.
+// Called once per feed at startup so /status lists it before the first poll,
+// with every counter at zero.
 export function registerFeed(feed: string): void {
   getDb().prepare("INSERT OR REPLACE INTO feed_status (provider_name) VALUES (?)").run(feed);
 }

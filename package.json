@@ -1,0 +1,26 @@
+{
+  "name": "data-sync-engine",
+  "version": "1.0.0",
+  "description": "Polls two imperfect UFC fight feeds, merges them into one canonical view, and serves it with freshness.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.ts\"",
+    "start": "node src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  },
+  "license": "ISC"
+}
